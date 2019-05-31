@@ -66,8 +66,9 @@
             <array>
                 <bean class="com.github.pagehelper.PageInterceptor">
                     <property name="properties">
+                        <!-- config params as the following -->
                         <value>
-                            dialect=mysql
+                            helperDialect=mysql
                         </value>
                     </property>
                 </bean>
