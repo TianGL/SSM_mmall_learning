@@ -9,12 +9,15 @@
      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+
+    <!--注册组件扫描器-->
     <context:component-scan base-package="cn.geliang.mmall" annotation-config="true"/>
 
     <!--<context:annotation-config/>-->
+    <!--通过扫描找到@Aspect 定义的切面类-->
     <aop:aspectj-autoproxy/>
 
-
+    <!--引入数据源配置-->
     <import resource="applicationContext-datasource.xml"/>
 
 

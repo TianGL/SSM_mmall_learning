@@ -6,6 +6,11 @@
 
     <display-name>Archetype Created Web Application</display-name>
 
+    <!--Spring MVC拦截器，
+        将request和response编码强制限定为UTF-8，
+        参数参看CharacterEncodingFilter源码
+        /*: 过滤所有请求
+    -->
     <filter>
         <filter-name>characterEncodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -24,18 +29,21 @@
     </filter>
     <filter-mapping>
         <filter-name>characterEncodingFilter</filter-name>
+        <!--过滤所有请求-->
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-
+    <!--两个Spring必备监听器-->
+    <!--监听HTTP请求事件，Web服务器接收的每次请求都会通知该监听器-->
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
-
+    <!--将Web容器与spring容器进行整合-->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     <context-param>
+        <!--指定Spring配置文件位置-->
         <param-name>contextConfigLocation</param-name>
         <param-value>
             classpath:applicationContext.xml
@@ -43,6 +51,7 @@
     </context-param>
 
     <servlet>
+        <!--Spring MVC中央调度器-->
         <servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
@@ -51,8 +60,6 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-
-
 
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>

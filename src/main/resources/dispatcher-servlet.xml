@@ -8,8 +8,14 @@
 	http://www.springframework.org/schema/mvc
 	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+    <!--组件扫描-->
     <context:component-scan base-package="cn.geliang.mmall" annotation-config="true"/>
 
+    <!--
+        注册MVC注解驱动
+        StringHttpMessageConverter： 字符串消息转换器，配合ResponseBody，将String插入到body区
+        MappingJackson2HttpMessageConverter： json消息转换器，配合ResponseBody，将jackson格式化的对象插入到body区
+    -->
     <mvc:annotation-driven>
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
@@ -32,7 +38,7 @@
 
 
 
-    <!-- 文件上传 -->
+    <!-- Spring MVC文件上传 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="10485760"/> <!-- 10m -->
         <property name="maxInMemorySize" value="4096" />
