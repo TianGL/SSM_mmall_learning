@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 public class CookieUtill {
-    private final  static String COOKIE_DOMAIN = ".geliang.cn";
+    private final  static String COOKIE_DOMAIN = ".geliang.com";
     private final static String COOKIE_NAME = "mmall_login_token";
 
     /**
@@ -31,6 +31,13 @@ public class CookieUtill {
         return null;
     }
 
+    // X:domain=".geliang.com"
+    // a: a.geliang.com                 cookie:domain=a.geliang.com; path="/"
+    // b: b.geliang.com                 cookie:domain=b.geliang.com; path="/"
+    // c: a.geliang.com/test/cc         cookie:domain=a.geliang.com; path="/test/cc"
+    // d: a.geliang.com/test/dd         cookie:domain=a.geliang.com; path="/test/dd"
+    // e: a.geliang.com/test            cookie:domain=a.geliang.com; path="/test"
+
     /**
      * 将登陆的token存入cookie
      * @param response
@@ -40,7 +47,7 @@ public class CookieUtill {
         Cookie ck = new Cookie(COOKIE_NAME, token);
         ck.setDomain(COOKIE_DOMAIN);
         ck.setPath("/"); // 存到根目录
-
+        ck.setHttpOnly(true); // 不许通过脚本访问cookie, 防止被攻击
         // 单位是秒
         // 如果这个maxage不设置的话，cookie就不会写入硬盘，而是写在内存。只在当前页面有效
         ck.setMaxAge(60 * 60 * 24 * 356); // -1代表永久
