@@ -2,12 +2,11 @@ package cn.geliang.mmall.service.impl;
 
 import cn.geliang.mmall.common.Const;
 import cn.geliang.mmall.common.ServerResponse;
-import cn.geliang.mmall.common.TokenCache;
 import cn.geliang.mmall.dao.UserMapper;
 import cn.geliang.mmall.pojo.User;
 import cn.geliang.mmall.service.IUserServcie;
 import cn.geliang.mmall.util.MD5Util;
-import com.mysql.fabric.Server;
+import cn.geliang.mmall.util.RedisPoolUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -136,7 +135,7 @@ public class UserServiceImpl implements IUserServcie {
         int resultCount = userMapper.checkAnwer(username, question, answer);
         if(resultCount > 0) { // > 0说明问题答案正确
             String forgetToken = UUID.randomUUID().toString();
-            TokenCache.setKey(TokenCache.TOKEN_PREFIX+username, forgetToken);
+            RedisPoolUtil.setex(Const.TOKEN_PREFIX+username, 60*60*24, forgetToken);
             return ServerResponse.createBySuccess(forgetToken);
         }
         return ServerResponse.createByErrorMessage("问题的答案错误");
@@ -158,7 +157,7 @@ public class UserServiceImpl implements IUserServcie {
         if(validResponse.isSuccess()) {
             return ServerResponse.createByErrorMessage("用户不存在");
         }
-        String token = TokenCache.getKey(TokenCache.TOKEN_PREFIX+username);
+        String token = RedisPoolUtil.get(Const.TOKEN_PREFIX+username);
         if(StringUtils.isBlank(token)) {
             return ServerResponse.createByErrorMessage("token无效或已经过期");
         }
