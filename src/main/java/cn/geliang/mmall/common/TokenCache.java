@@ -3,15 +3,17 @@ package cn.geliang.mmall.common;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 public class TokenCache {
 
-    private static Logger logger = LoggerFactory.getLogger(TokenCache.class);
+//    private static Logger log = LoggerFactory.getLogger(TokenCache.class);
     public static final String TOKEN_PREFIX = "token_";
 
     // LRU控制maxSize
@@ -38,7 +40,7 @@ public class TokenCache {
             }
             return value;
         } catch (ExecutionException e) {
-            logger.error("localCache get error", e);
+            log.error("localCache get error", e);
         }
         return null;
     }
