@@ -7,6 +7,7 @@ import cn.geliang.mmall.pojo.User;
 import cn.geliang.mmall.service.IUserServcie;
 import cn.geliang.mmall.util.MD5Util;
 import cn.geliang.mmall.util.RedisPoolUtil;
+import cn.geliang.mmall.util.RedisSharedPoolUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -135,7 +136,7 @@ public class UserServiceImpl implements IUserServcie {
         int resultCount = userMapper.checkAnwer(username, question, answer);
         if(resultCount > 0) { // > 0说明问题答案正确
             String forgetToken = UUID.randomUUID().toString();
-            RedisPoolUtil.setex(Const.TOKEN_PREFIX+username, 60*60*24, forgetToken);
+            RedisSharedPoolUtil.setex(Const.TOKEN_PREFIX+username, 60*60*24, forgetToken);
             return ServerResponse.createBySuccess(forgetToken);
         }
         return ServerResponse.createByErrorMessage("问题的答案错误");
@@ -157,7 +158,7 @@ public class UserServiceImpl implements IUserServcie {
         if(validResponse.isSuccess()) {
             return ServerResponse.createByErrorMessage("用户不存在");
         }
-        String token = RedisPoolUtil.get(Const.TOKEN_PREFIX+username);
+        String token = RedisSharedPoolUtil.get(Const.TOKEN_PREFIX+username);
         if(StringUtils.isBlank(token)) {
             return ServerResponse.createByErrorMessage("token无效或已经过期");
         }

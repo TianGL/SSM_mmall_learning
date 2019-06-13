@@ -8,10 +8,7 @@ import cn.geliang.mmall.pojo.User;
 import cn.geliang.mmall.service.IFileService;
 import cn.geliang.mmall.service.IProductService;
 import cn.geliang.mmall.service.IUserServcie;
-import cn.geliang.mmall.util.CookieUtill;
-import cn.geliang.mmall.util.JsonUtil;
-import cn.geliang.mmall.util.PropertiesUtil;
-import cn.geliang.mmall.util.RedisPoolUtil;
+import cn.geliang.mmall.util.*;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +51,7 @@ public class ProductManageController {
         if (StringUtils.isEmpty(loginToken)) {
             return ServerResponse.createByErrorMessage("用户未登陆，无法获取当前用户信息");
         }
-        String userJsonStr = RedisPoolUtil.get(loginToken);
+        String userJsonStr = RedisSharedPoolUtil.get(loginToken);
         User user = JsonUtil.string2Obje(userJsonStr, User.class);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登陆，请登录管理员");
@@ -74,7 +71,7 @@ public class ProductManageController {
         if (StringUtils.isEmpty(loginToken)) {
             return ServerResponse.createByErrorMessage("用户未登陆，无法获取当前用户信息");
         }
-        String userJsonStr = RedisPoolUtil.get(loginToken);
+        String userJsonStr = RedisSharedPoolUtil.get(loginToken);
         User user = JsonUtil.string2Obje(userJsonStr, User.class);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登陆，请登录管理员");
@@ -101,7 +98,7 @@ public class ProductManageController {
         if (StringUtils.isEmpty(loginToken)) {
             return ServerResponse.createByErrorMessage("用户未登陆，无法获取当前用户信息");
         }
-        String userJsonStr = RedisPoolUtil.get(loginToken);
+        String userJsonStr = RedisSharedPoolUtil.get(loginToken);
         User user = JsonUtil.string2Obje(userJsonStr, User.class);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登陆，请登录管理员");
@@ -123,7 +120,7 @@ public class ProductManageController {
         if (StringUtils.isEmpty(loginToken)) {
             return ServerResponse.createByErrorMessage("用户未登陆，无法获取当前用户信息");
         }
-        String userJsonStr = RedisPoolUtil.get(loginToken);
+        String userJsonStr = RedisSharedPoolUtil.get(loginToken);
         User user = JsonUtil.string2Obje(userJsonStr, User.class);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登陆，请登录管理员");
@@ -156,7 +153,7 @@ public class ProductManageController {
         if (StringUtils.isEmpty(loginToken)) {
             return ServerResponse.createByErrorMessage("用户未登陆，无法获取当前用户信息");
         }
-        String userJsonStr = RedisPoolUtil.get(loginToken);
+        String userJsonStr = RedisSharedPoolUtil.get(loginToken);
         User user = JsonUtil.string2Obje(userJsonStr, User.class);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登陆，请登录管理员");
@@ -183,7 +180,7 @@ public class ProductManageController {
         if (StringUtils.isEmpty(loginToken)) {
             return ServerResponse.createByErrorMessage("用户未登陆，无法获取当前用户信息");
         }
-        String userJsonStr = RedisPoolUtil.get(loginToken);
+        String userJsonStr = RedisSharedPoolUtil.get(loginToken);
         User user = JsonUtil.string2Obje(userJsonStr, User.class);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登陆，请登录管理员");
@@ -215,7 +212,7 @@ public class ProductManageController {
             resultMap.put("msg", "请登录管理员");
             return resultMap;
         }
-        String userJsonStr = RedisPoolUtil.get(loginToken);
+        String userJsonStr = RedisSharedPoolUtil.get(loginToken);
         User user = JsonUtil.string2Obje(userJsonStr, User.class);
         if (user == null) {
             resultMap.put("success", false);
