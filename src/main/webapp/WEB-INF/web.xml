@@ -34,14 +34,25 @@
     </filter-mapping>
     
     <!--每一次请求更新token有效时间过滤器-->
+    <!--<filter>-->
+        <!--<filter-name>sessionExpireFilter</filter-name>-->
+        <!--<filter-class>cn.geliang.mmall.controller.common.SessionExpireFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>sessionExpireFilter</filter-name>-->
+        <!--<url-pattern>*.do</url-pattern>-->
+    <!--</filter-mapping>-->
+    
     <filter>
-        <filter-name>sessionExpireFilter</filter-name>
-        <filter-class>cn.geliang.mmall.controller.common.SessionExpireFilter</filter-class>
+        <filter-name>springSessionRepositoryFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>sessionExpireFilter</filter-name>
+        <filter-name>springSessionRepositoryFilter</filter-name>
         <url-pattern>*.do</url-pattern>
     </filter-mapping>
+    
+    
 
     <!--两个Spring必备监听器-->
     <!--监听HTTP请求事件，Web服务器接收的每次请求都会通知该监听器-->
