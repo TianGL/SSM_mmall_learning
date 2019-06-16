@@ -11,9 +11,15 @@
 
 
     <!--注册组件扫描器-->
-    <context:component-scan base-package="cn.geliang.mmall" annotation-config="true"/>
+    <context:component-scan base-package="cn.geliang.mmall" annotation-config="true">
+        <!--Spring 不扫描Controller注解， 较为SpringMVC的dispatcher-servlet.xml扫描-->
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
+    <!--激活已经注册的bean, 在context:component-scan中已经置为true -->
     <!--<context:annotation-config/>-->
+
+
     <!--通过扫描找到@Aspect 定义的切面类-->
     <aop:aspectj-autoproxy/>
 

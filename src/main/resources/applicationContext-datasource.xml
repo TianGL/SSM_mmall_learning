@@ -13,7 +13,7 @@
         <context:annotation-config> 是用于激活那些已经在spring容器里注册过的bean（无论是通过xml的方式还是通过package sanning的方式）上面的注解。
         <context:component-scan>除了具有<context:annotation-config>的功能之外，<context:component-scan>还可以在指定的package下扫描以及注册javabean 。
     -->
-    <context:component-scan base-package="cn.geliang.mmall" annotation-config="true"/>
+    <!--<context:component-scan base-package="cn.geliang.mmall" annotation-config="true"/>-->
 
     <!--注册datasource.properties配置文件-->
     <bean id="propertyConfigurer"
@@ -90,13 +90,13 @@
     </bean>
 
     <!-- 事务管理 DataSourceTransactionManager 注册 -->
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="rollbackOnCommitFailure" value="true"/>
-    </bean>
+    <!--<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+        <!--<property name="rollbackOnCommitFailure" value="true"/>-->
+    <!--</bean>-->
 
     <!-- 使用@Transactional进行声明式事务管理需要声明下面这行 -->
-    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+    <!--<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />-->
 
 
 </beans>

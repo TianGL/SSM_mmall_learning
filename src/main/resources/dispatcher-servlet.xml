@@ -9,7 +9,11 @@
 	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!--组件扫描-->
-    <context:component-scan base-package="cn.geliang.mmall" annotation-config="true"/>
+    <!--use-default-filters="false":不进行默认扫表 -->
+    <context:component-scan base-package="cn.geliang.mmall.controller" annotation-config="true" use-default-filters="false">
+        <!--SpringMVC之扫表Controller注解-->
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
     <!--
         注册MVC注解驱动
