@@ -46,8 +46,19 @@
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="10485760"/> <!-- 10m -->
         <property name="maxInMemorySize" value="4096" />
-        <property name="defaultEncoding" value="UTF-8"></property>
+        <property name="defaultEncoding" value="UTF-8"/>
     </bean>
+
+    <!--SpringMVC拦截器-->
+    <mvc:interceptors>
+        <!--定义在这里的所有都会拦截-->
+        <mvc:interceptor>
+            <!--拦截manage目录下的所以有标签和子标签-->
+            <mvc:mapping path="/manage/**"/>
+            <!--<mvc:exclude-mapping path="/manage/user/login.do"/>-->
+            <bean class="cn.geliang.mmall.common.Interceptor.AuthorityInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 
 </beans>
