@@ -6,9 +6,7 @@ import cn.geliang.mmall.vo.ProductDetailVo;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = "/product/")
@@ -28,6 +26,13 @@ public class ProductController {
         return iProductService.getProductDetail(productId);
     }
 
+    // RESTful形式
+    @RequestMapping(value = "/{productId}", method = RequestMethod.GET)
+    @ResponseBody
+    public ServerResponse<ProductDetailVo> detailRESTful(@PathVariable Integer productId) {
+        return iProductService.getProductDetail(productId);
+    }
+
     /**
      * 根据关键字和分类id获取商品并实现分页
      * @param keyword
@@ -44,6 +49,16 @@ public class ProductController {
                                          @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                                          @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
                                          @RequestParam(value = "orderBy", defaultValue = "") String orderBy) {
+        return iProductService.getProductByKeywordCategory(keyword, categoryId, pageNum, pageSize, orderBy);
+    }
+
+    @RequestMapping("/{keyword}/{categoryId}/{pageNum}/{pageSize}/{orderBy}")
+    @ResponseBody
+    public ServerResponse<PageInfo> listRESTful(@PathVariable(value = "keyword") String keyword,
+                                         @PathVariable(value = "categoryId") Integer categoryId,
+                                         @PathVariable(value = "pageNum") int pageNum,
+                                         @PathVariable(value = "pageSize") int pageSize,
+                                         @PathVariable(value = "orderBy") String orderBy) {
         return iProductService.getProductByKeywordCategory(keyword, categoryId, pageNum, pageSize, orderBy);
     }
 
