@@ -1,7 +1,6 @@
 package cn.geliang.mmall.dao;
 
 import cn.geliang.mmall.pojo.Order;
-import cn.geliang.mmall.pojo.OrderItem;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -27,4 +26,8 @@ public interface OrderMapper {
     List<Order> selectByUserId(Integer userId);
 
     List<Order> selectAllOrder();
+
+    List<Order> selectOrderStatusByCreateTime(@Param("status") Integer status, @Param("date") String date);
+
+    int closeOrderByOrderId(Integer id);
 }

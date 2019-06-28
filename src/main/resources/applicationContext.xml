@@ -3,6 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="
      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -22,6 +23,9 @@
 
     <!--通过扫描找到@Aspect 定义的切面类-->
     <aop:aspectj-autoproxy/>
+
+    <!--<context:property-placeholder location="classpath:datasource.properties"/>-->
+    <task:annotation-driven/>
 
     <!--引入数据源配置-->
     <import resource="applicationContext-datasource.xml"/>
