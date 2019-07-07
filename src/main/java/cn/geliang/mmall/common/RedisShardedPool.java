@@ -2,7 +2,6 @@ package cn.geliang.mmall.common;
 
 import cn.geliang.mmall.util.PropertiesUtil;
 import com.google.common.collect.Lists;
-import jdk.nashorn.internal.runtime.SharedPropertyMap;
 import redis.clients.jedis.*;
 import redis.clients.util.Hashing;
 import redis.clients.util.Sharded;
